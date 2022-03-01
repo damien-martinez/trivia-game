@@ -22,7 +22,7 @@
 }
 
 .column-half {
-  width: 50%;
+  width: 100%;
 }
 
 .flex-wrap {
@@ -35,15 +35,16 @@
 
 /* @media screen and (min-width: 768px) {
   .container,
-  .head-container,
-  .container-new-entry,
-  .container-entries {
+  .head-container {
     max-width: 900px;
   }
 
-  .column-full,
-  .column-half {
-    padding: 0 0.75rem;
+  .play-trivia {
+    margin-top: 9rem;
+  }
+
+  .margin-top-divs {
+    margin-top: 6rem;
   }
 
   .column-half {

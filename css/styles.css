@@ -59,14 +59,37 @@ select {
   border: none;
   padding: 0.5rem 4rem;
   font-size: 32px;
-  margin-top: 8rem;
+  margin-top: 6rem;
   margin-bottom: 1rem;
 }
 
 .margin-top-head {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .margin-top-divs {
-  margin-top: 5rem;
+  margin-top: 3rem;
+}
+
+.header-margin-left {
+  margin-left: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .container,
+  .header-container {
+    max-width: 900px;
+  }
+
+  .play-trivia {
+    margin-top: 9rem;
+  }
+
+  .margin-top-divs {
+    margin-top: 6rem;
+  }
+
+  .column-half {
+    width: 50%;
+  }
 }
