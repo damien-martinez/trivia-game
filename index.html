@@ -11,8 +11,55 @@
 </head>
 <body>
   <header>
+    <div class="header-container">
+      <div class="row no-wrap-center">
+        <h1 class="trivia-header">TRIVIA</h1>
+        <div class="abacus-div">
+          <img class="abacus" src="images/abacus.png" alt="">
+        </div>
+      </div>
+    </div>
   </header>
   <main>
+    <div class="container">
+      <div class="row center margin-top-head">
+        <h1 class="game-h1">GAME SET UP</h1>
+      </div>
+      <div class="row flex-wrap margin-top-divs">
+        <div class="player1-div column-half margin-divs">
+          <label for="player-name">Player 1:</label>
+          <input required name="name" type="text" id="player-name" placeholder="Player 1">
+        </div>
+        <div class="difficulty-div column-half margin-divs">
+          <label for="difficulty-select">Select Difficulty:</label>
+          <select name="difficulty-select" id="difficulty-select">
+            <option value="" disabled selected>Any Difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <div class="questions-div column-half margin-divs">
+          <label for="number-of-questions">Number of Questions:</label>
+          <select required name="number-of-questions" id="number-of-questions">
+            <option value="10" disabled selected>10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+          </select>
+        </div>
+        <div class="category-div column-half margin-divs">
+          <label for="category-select">Category Select:</label>
+          <select required name="category-select" id="category-select">
+            <option value="9" disabled selected>General Knowledge</option>
+          </select>
+        </div>
+      </div>
+      <div class="row center">
+        <button class="play-trivia" type="submit">Play Trivia!</button>
+      </div>
+    </div>
+
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

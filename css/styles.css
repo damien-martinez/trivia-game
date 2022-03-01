@@ -1,0 +1,72 @@
+header {
+  background-color: #cbc0d3;
+}
+
+body {
+  background-color: #8e9aaf;
+}
+
+label,
+input,
+select,
+option {
+  display: block;
+}
+
+label {
+  color: white;
+  font-size: 24px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.3rem;
+}
+
+.trivia-header {
+  color: white;
+  font-size: 32px;
+}
+
+.abacus {
+  height: 50%;
+  width: 10%;
+}
+
+.abacus-div {
+  margin-left: 0.5rem;
+}
+
+.center {
+  justify-content: center;
+}
+
+.game-h1 {
+  text-decoration: underline;
+  color: white;
+  font-size: 38px;
+}
+
+.margin-divs {
+  padding: 0.5rem 1rem;
+}
+
+.play-trivia {
+  background-color: #cbc0d3;
+  color: white;
+  border-radius: 0.6rem;
+  border: none;
+  padding: 0.5rem 4rem;
+  font-size: 32px;
+  margin-top: 8rem;
+  margin-bottom: 1rem;
+}
+
+.margin-top-head {
+  margin-top: 1rem;
+}
+
+.margin-top-divs {
+  margin-top: 5rem;
+}
