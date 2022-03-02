@@ -5,25 +5,26 @@ var $triviaForm = document.querySelector('#trivia-form');
 var $questionContainer = document.querySelector('.question-container');
 var $setUpContainer = document.querySelector('.container');
 
-var category = '';
+window.addEventListener('load', function () {
 
-categoriesRequest.open('GET', 'https://opentdb.com/api_category.php');
+  categoriesRequest.open('GET', 'https://opentdb.com/api_category.php');
 
-categoriesRequest.responseType = 'json';
+  categoriesRequest.responseType = 'json';
 
-categoriesRequest.addEventListener('load', function () {
+  categoriesRequest.addEventListener('load', function () {
 
-  for (var i = 1, j = 10; i < categoriesRequest.response.trivia_categories.length; i++, j++) {
-    category = categoriesRequest.response.trivia_categories[i].name;
-    var $option = document.createElement('option');
-    $option.value = j;
-    $option.text = category;
-    $categorySelect.appendChild($option);
+    for (var i = 1, j = 10; i < categoriesRequest.response.trivia_categories.length; i++, j++) {
+      var category = '';
+      category = categoriesRequest.response.trivia_categories[i].name;
+      var $option = document.createElement('option');
+      $option.value = j;
+      $option.text = category;
+      $categorySelect.appendChild($option);
 
-  }
+    }
+  });
+  categoriesRequest.send();
 });
-
-categoriesRequest.send();
 
 function submitForm(event) {
   event.preventDefault();
