@@ -12,6 +12,11 @@
   margin: 0 auto;
 }
 
+.question-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 .row {
   display: flex;
 }
