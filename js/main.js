@@ -1,6 +1,10 @@
 var categoriesRequest = new XMLHttpRequest();
+var questionsRequest = new XMLHttpRequest();
 var $categorySelect = document.querySelector('#category-select');
 var category = '';
+// var $triviaButton = document.querySelector('.play-trivia');
+
+var $triviaForm = document.querySelector('#trivia-form');
 
 categoriesRequest.open('GET', 'https://opentdb.com/api_category.php');
 
@@ -19,3 +23,34 @@ categoriesRequest.addEventListener('load', function () {
 });
 
 categoriesRequest.send();
+
+function submitForm(event) {
+  event.preventDefault();
+  // var playerName = $triviaForm.elements.name.value;
+  var difficulty = $triviaForm.elements.difficulty_select.value;
+  var numberOfQuestions = $triviaForm.elements.number_of_questions.value;
+  var pulledCategory = $triviaForm.elements.category_select.value;
+
+  if (difficulty === '') {
+    var apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions + '&category=' + pulledCategory;
+  } else {
+    apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions + '&category=' + pulledCategory + '&difficulty=' + difficulty;
+  }
+
+  // console.log(apiUrl);
+
+  questionsRequest.open('GET', apiUrl);
+  questionsRequest.responseType = 'json';
+
+  // function getTrivia() {
+  //   var triviaObj = questionsRequest.response;
+
+  // }
+
+  // questionsRequest.addEventListener('load', getTrivia);
+
+  // questionsRequest.send();
+
+}
+
+$triviaForm.addEventListener('submit', submitForm);
