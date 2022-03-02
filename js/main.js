@@ -2,8 +2,6 @@ var categoriesRequest = new XMLHttpRequest();
 var questionsRequest = new XMLHttpRequest();
 var $categorySelect = document.querySelector('#category-select');
 var $triviaForm = document.querySelector('#trivia-form');
-var $questionContainer = document.querySelector('.question-container');
-var $setUpContainer = document.querySelector('.container');
 
 window.addEventListener('load', function () {
 
@@ -42,11 +40,6 @@ function submitForm(event) {
   questionsRequest.responseType = 'json';
 
   function getTrivia() {
-    var triviaObj = questionsRequest.response;
-
-    if (questionsRequest.status === 200) {
-      seeQuestions(triviaObj);
-    }
 
   }
 
@@ -57,38 +50,3 @@ function submitForm(event) {
 }
 
 $triviaForm.addEventListener('submit', submitForm);
-
-function seeQuestions(triviaObj) {
-  $setUpContainer.setAttribute('class', 'hidden');
-  $questionContainer.setAttribute('class', 'question-container');
-  var results = triviaObj.results;
-
-  for (var i = 0; i < results.length; i++) {
-
-    var $paragraph = document.createElement('p');
-    $paragraph.textContent = 'Question: ' + results[i].question;
-
-    var $questionAnswerDiv = document.createElement('div');
-    $questionAnswerDiv.appendChild($paragraph);
-    $questionContainer.appendChild($questionAnswerDiv);
-
-    var $choice1 = document.createElement('p');
-    var $choice2 = document.createElement('p');
-    var $choice3 = document.createElement('p');
-    var $choice4 = document.createElement('p');
-
-    $choice1.textContent = 'A. ' + results[i].correct_answer;
-    $choice2.textContent = 'B. ' + results[i].incorrect_answers[0];
-    $choice3.textContent = 'C. ' + results[i].incorrect_answers[1];
-    $choice4.textContent = 'D. ' + results[i].incorrect_answers[2];
-
-    $questionAnswerDiv.appendChild($choice1);
-    $questionAnswerDiv.appendChild($choice2);
-    $questionAnswerDiv.appendChild($choice3);
-    $questionAnswerDiv.appendChild($choice4);
-
-    $questionContainer.appendChild($questionAnswerDiv);
-
-  }
-
-}
