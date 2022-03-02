@@ -1,0 +1,39 @@
+.hidden {
+  display: none !important;
+}
+
+.header-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.question-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+}
+
+.no-wrap-center {
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.column-half {
+  width: 100%;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.center {
+  justify-content: center;
+}
