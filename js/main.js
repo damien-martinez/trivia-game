@@ -43,9 +43,12 @@ function submitForm(event) {
   questionsRequest.responseType = 'json';
 
   function getTrivia() {
-    var triviaObj = questionsRequest.response;
+    var results = questionsRequest.response.results;
+
+    dataModel.results = results;
+
     if (questionsRequest.status === 200) {
-      seeQuestions(triviaObj);
+      seeQuestions(results);
     }
 
   }
@@ -58,19 +61,15 @@ function submitForm(event) {
 
 $triviaForm.addEventListener('submit', submitForm);
 
-function seeQuestions(triviaObj) {
+function seeQuestions(results) {
   $setUpContainer.setAttribute('class', 'hidden');
   $questionContainer.setAttribute('class', 'question-container');
 
-  dataModel.results = triviaObj.results;
-
-  var results = dataModel.results;
-
-  var correctAnswer = results[0].correct_answer;
+  var correctAnswer = results[dataModel.count].correct_answer;
 
   dataModel.correctAnswer = correctAnswer;
 
-  var choicesArr = [correctAnswer, results[0].incorrect_answers[0], results[0].incorrect_answers[1], results[0].incorrect_answers[2]];
+  var choicesArr = [correctAnswer, results[dataModel.count].incorrect_answers[0], results[dataModel.count].incorrect_answers[1], results[dataModel.count].incorrect_answers[2]];
 
   dataModel.choicesArr = choicesArr;
 
@@ -80,8 +79,14 @@ function seeQuestions(triviaObj) {
 
   var $h1 = document.createElement('h1');
   $h1.setAttribute('class', 'question');
-  $h1.textContent = 'Question: ' + results[0].question;
+  $h1.textContent = 'Question: ' + results[dataModel.count].question;
   $questionDiv.appendChild($h1);
+
+  var $score = document.createElement('div');
+  $score.setAttribute('class', 'score');
+  $score.textContent = (dataModel.count + 1) + '/' + dataModel.results.length;
+  $questionContainer.appendChild($score);
+  dataModel.scoreDom = $score;
 
   var $choiceDiv = document.createElement('div');
   $choiceDiv.setAttribute('class', 'row flex-wrap margin-top-head');
@@ -158,7 +163,7 @@ function seeQuestions(triviaObj) {
   $p4.prepend($d);
 
   var $submitDiv = document.createElement('div');
-  $submitDiv.setAttribute('class', 'row center margin-top-head');
+  $submitDiv.setAttribute('class', 'row center margin-top-submit');
 
   $questionContainer.appendChild($submitDiv);
 
@@ -171,9 +176,12 @@ function seeQuestions(triviaObj) {
   $submitDiv.appendChild($submit);
 
   $choiceDiv.addEventListener('click', clickAnswer);
+
   $submit.addEventListener('click', submitAnswer);
 
   dataModel.choiceDiv = $choiceDiv;
+  dataModel.questionDivDom = $questionDiv;
+  dataModel.submitDivDom = $submitDiv;
 
 }
 
@@ -211,11 +219,29 @@ function clickAnswer(event) {
 }
 
 function submitAnswer(event) {
+  if (dataModel.clicked !== '') {
 
-  if (dataModel.clicked === dataModel.correctAnswer) {
-    dataModel.paragraph.setAttribute('class', 'choice green');
-  } else {
-    dataModel.paragraph.setAttribute('class', 'choice red');
-    dataModel.correctChoiceDom.setAttribute('class', 'choice green');
+    if (dataModel.clicked === dataModel.correctAnswer) {
+      dataModel.paragraph.setAttribute('class', 'choice green');
+      dataModel.correctCount++;
+    } else {
+      dataModel.paragraph.setAttribute('class', 'choice red');
+      dataModel.correctChoiceDom.setAttribute('class', 'choice green');
+    }
+
+    setTimeout(triggerSeeQuestions, 500);
+
   }
+
+}
+
+function triggerSeeQuestions() {
+  dataModel.clicked = '';
+  dataModel.count++;
+  dataModel.choiceDiv.setAttribute('class', 'hidden');
+  dataModel.questionDivDom.setAttribute('class', 'hidden');
+  dataModel.submitDivDom.setAttribute('class', 'hidden');
+  dataModel.scoreDom.setAttribute('class', 'hidden');
+  seeQuestions(dataModel.results);
+
 }
