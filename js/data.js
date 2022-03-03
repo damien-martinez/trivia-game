@@ -6,6 +6,10 @@ var dataModel = {
   correctChoiceDom: {},
   paragraph: {},
   results: [],
-  choiceDiv: {}
+  choiceDiv: {},
+  count: 0,
+  questionDivDom: {},
+  submitDivDom: {},
+  correctCount: 0
 
 };

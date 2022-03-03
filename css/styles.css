@@ -73,7 +73,11 @@ select {
 }
 
 .margin-top-head {
-  margin-top: 2rem;
+  margin-top: 1rem;
+}
+
+.margin-top-submit {
+  margin: 2rem;
 }
 
 .margin-top-divs {
@@ -129,4 +133,11 @@ select {
 
 .red {
   background-color: #f4acb7;
+}
+
+.score {
+  width: 100%;
+  margin-left: 1rem;
+  color: white;
+  font-size: 24px;
 }
