@@ -63,6 +63,15 @@ select {
   margin-bottom: 1rem;
 }
 
+.submit {
+  background-color: #cbc0d3;
+  color: white;
+  border-radius: 0.6rem;
+  border: none;
+  padding: 0.5rem 6rem;
+  font-size: 32px;
+}
+
 .margin-top-head {
   margin-top: 2rem;
 }
@@ -73,6 +82,13 @@ select {
 
 .header-margin-left {
   margin-left: 1rem;
+}
+
+.question {
+  color: white;
+  font-size: 34px;
+  text-align: center;
+  margin-top: 4rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -92,4 +108,25 @@ select {
   .column-half {
     width: 50%;
   }
+}
+
+.choice {
+  margin: 1rem;
+  background-color: white;
+  padding: 1rem;
+  font-size: 24px;
+  text-align: center;
+  border-radius: 0.3rem;
+}
+
+.border-highlight {
+  border: solid 0.3rem #cbc0d3;
+}
+
+.green {
+  background-color: #95d5b2;
+}
+
+.red {
+  background-color: #f4acb7;
 }
