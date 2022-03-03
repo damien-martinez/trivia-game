@@ -126,58 +126,35 @@ function seeQuestions(triviaObj) {
   var $choice3 = document.createElement('span');
   var $choice4 = document.createElement('span');
 
-  var randomInt = Math.floor(Math.random() * num);
-  if (choicesArr[randomInt] === correctAnswer) {
-    $choice1.textContent = choicesArr[randomInt];
-    choicesArr.splice(randomInt, 1);
-    num--;
+  function assignAnswer(choiceParam, paragraphParam) {
+    var randomInt = Math.floor(Math.random() * num);
 
-    dataModel.correctChoiceDom = $p1;
-  } else {
-    $choice1.textContent = choicesArr[randomInt];
-    choicesArr.splice(randomInt, 1);
-    num--;
+    if (choicesArr[randomInt] === correctAnswer) {
+      choiceParam.textContent = choicesArr[randomInt];
+      choicesArr.splice(randomInt, 1);
+      num--;
 
+      dataModel.correctChoiceDom = paragraphParam;
+    } else {
+      choiceParam.textContent = choicesArr[randomInt];
+      choicesArr.splice(randomInt, 1);
+      num--;
+    }
+    if (choicesArr === 1) {
+      if (choicesArr[randomInt] === correctAnswer) {
+        choiceParam.textContent = choicesArr[0];
+
+        dataModel.correctChoiceDom = paragraphParam;
+      } else {
+        choiceParam.textContent = choicesArr[0];
+      }
+    }
   }
 
-  randomInt = Math.floor(Math.random() * num);
-
-  if (choicesArr[randomInt] === correctAnswer) {
-    $choice2.textContent = choicesArr[randomInt];
-    choicesArr.splice(randomInt, 1);
-    num--;
-
-    dataModel.correctChoiceDom = $p2;
-  } else {
-    $choice2.textContent = choicesArr[randomInt];
-    choicesArr.splice(randomInt, 1);
-    num--;
-
-  }
-
-  randomInt = Math.floor(Math.random() * num);
-
-  if (choicesArr[randomInt] === correctAnswer) {
-    $choice3.textContent = choicesArr[randomInt];
-    choicesArr.splice(randomInt, 1);
-    num--;
-
-    dataModel.correctChoiceDom = $p3;
-  } else {
-    $choice3.textContent = choicesArr[randomInt];
-    choicesArr.splice(randomInt, 1);
-    num--;
-
-  }
-
-  if (choicesArr[randomInt] === correctAnswer) {
-    $choice4.textContent = choicesArr[0];
-
-    dataModel.correctChoiceDom = $p4;
-  } else {
-    $choice4.textContent = choicesArr[0];
-
-  }
+  assignAnswer($choice1, $p1);
+  assignAnswer($choice2, $p2);
+  assignAnswer($choice3, $p3);
+  assignAnswer($choice4, $p4);
 
   var $a = document.createElement('span');
   var $b = document.createElement('span');
