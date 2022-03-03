@@ -71,10 +71,8 @@ function seeQuestions(triviaObj) {
   dataModel.correctAnswer = correctAnswer;
 
   var choicesArr = [correctAnswer, results[0].incorrect_answers[0], results[0].incorrect_answers[1], results[0].incorrect_answers[2]];
-  var num = 3;
 
   dataModel.choicesArr = choicesArr;
-  dataModel.num = num;
 
   var $questionDiv = document.createElement('div');
   $questionDiv.setAttribute('class', 'row');
@@ -185,13 +183,11 @@ function assignAnswer(choiceParam, paragraphParam) {
   if (dataModel.choicesArr[randomInt] === dataModel.correctAnswer) {
     choiceParam.textContent = dataModel.choicesArr[randomInt];
     dataModel.choicesArr.splice(randomInt, 1);
-    dataModel.num--;
 
     dataModel.correctChoiceDom = paragraphParam;
   } else {
     choiceParam.textContent = dataModel.choicesArr[randomInt];
     dataModel.choicesArr.splice(randomInt, 1);
-    dataModel.num--;
   }
 }
 
