@@ -73,6 +73,9 @@ function seeQuestions(triviaObj) {
   var choicesArr = [correctAnswer, results[0].incorrect_answers[0], results[0].incorrect_answers[1], results[0].incorrect_answers[2]];
   var num = 3;
 
+  dataModel.choicesArr = choicesArr;
+  dataModel.num = num;
+
   var $questionDiv = document.createElement('div');
   $questionDiv.setAttribute('class', 'row');
   $questionContainer.appendChild($questionDiv);
@@ -126,31 +129,6 @@ function seeQuestions(triviaObj) {
   var $choice3 = document.createElement('span');
   var $choice4 = document.createElement('span');
 
-  function assignAnswer(choiceParam, paragraphParam) {
-    var randomInt = Math.floor(Math.random() * num);
-
-    if (choicesArr[randomInt] === correctAnswer) {
-      choiceParam.textContent = choicesArr[randomInt];
-      choicesArr.splice(randomInt, 1);
-      num--;
-
-      dataModel.correctChoiceDom = paragraphParam;
-    } else {
-      choiceParam.textContent = choicesArr[randomInt];
-      choicesArr.splice(randomInt, 1);
-      num--;
-    }
-    if (choicesArr === 1) {
-      if (choicesArr[randomInt] === correctAnswer) {
-        choiceParam.textContent = choicesArr[0];
-
-        dataModel.correctChoiceDom = paragraphParam;
-      } else {
-        choiceParam.textContent = choicesArr[0];
-      }
-    }
-  }
-
   assignAnswer($choice1, $p1);
   assignAnswer($choice2, $p2);
   assignAnswer($choice3, $p3);
@@ -200,6 +178,22 @@ function seeQuestions(triviaObj) {
   dataModel.choiceDiv = $choiceDiv;
   dataModel.submitDiv = $submitDiv;
 
+}
+
+function assignAnswer(choiceParam, paragraphParam) {
+  var randomInt = Math.floor(Math.random() * dataModel.choicesArr.length);
+
+  if (dataModel.choicesArr[randomInt] === dataModel.correctAnswer) {
+    choiceParam.textContent = dataModel.choicesArr[randomInt];
+    dataModel.choicesArr.splice(randomInt, 1);
+    dataModel.num--;
+
+    dataModel.correctChoiceDom = paragraphParam;
+  } else {
+    choiceParam.textContent = dataModel.choicesArr[randomInt];
+    dataModel.choicesArr.splice(randomInt, 1);
+    dataModel.num--;
+  }
 }
 
 function clickAnswer(event) {
