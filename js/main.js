@@ -160,7 +160,7 @@ function seeQuestions(triviaObj) {
   $p4.prepend($d);
 
   var $submitDiv = document.createElement('div');
-  $submitDiv.setAttribute('class', 'row center');
+  $submitDiv.setAttribute('class', 'row center margin-top-head');
 
   $questionContainer.appendChild($submitDiv);
 
@@ -173,10 +173,9 @@ function seeQuestions(triviaObj) {
   $submitDiv.appendChild($submit);
 
   $choiceDiv.addEventListener('click', clickAnswer);
-  $submitDiv.addEventListener('click', submitAnswer);
+  $submit.addEventListener('click', submitAnswer);
 
   dataModel.choiceDiv = $choiceDiv;
-  dataModel.submitDiv = $submitDiv;
 
 }
 
