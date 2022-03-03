@@ -61,133 +61,151 @@ function seeQuestions(triviaObj) {
   $setUpContainer.setAttribute('class', 'hidden');
   $questionContainer.setAttribute('class', 'question-container');
   var results = triviaObj.results;
-  // console.log(results);
 
-  for (var i = 0; i < 1; i++) {
-    var correctAnswer = results[i].correct_answer;
-    var choicesArr = [correctAnswer, results[i].incorrect_answers[0], results[i].incorrect_answers[1], results[i].incorrect_answers[2]];
-    var num = 3;
+  var correctAnswer = results[0].correct_answer;
+  var choicesArr = [correctAnswer, results[0].incorrect_answers[0], results[0].incorrect_answers[1], results[0].incorrect_answers[2]];
+  var num = 3;
 
-    var $questionDiv = document.createElement('div');
-    $questionDiv.setAttribute('class', 'row');
-    $questionContainer.appendChild($questionDiv);
+  var $questionDiv = document.createElement('div');
+  $questionDiv.setAttribute('class', 'row');
+  $questionContainer.appendChild($questionDiv);
 
-    var $h1 = document.createElement('h1');
-    $h1.setAttribute('class', 'question');
-    $h1.textContent = 'Question: ' + results[i].question;
-    $questionDiv.appendChild($h1);
+  var $h1 = document.createElement('h1');
+  $h1.setAttribute('class', 'question');
+  $h1.textContent = 'Question: ' + results[0].question;
+  $questionDiv.appendChild($h1);
 
-    var $choiceDiv = document.createElement('div');
-    $choiceDiv.setAttribute('class', 'row flex-wrap margin-top-head');
-    $questionContainer.appendChild($choiceDiv);
+  var $choiceDiv = document.createElement('div');
+  $choiceDiv.setAttribute('class', 'row flex-wrap margin-top-head');
+  $questionContainer.appendChild($choiceDiv);
 
-    var $questionDiv1 = document.createElement('div');
-    var $questionDiv2 = document.createElement('div');
-    var $questionDiv3 = document.createElement('div');
-    var $questionDiv4 = document.createElement('div');
+  var $questionDiv1 = document.createElement('div');
+  var $questionDiv2 = document.createElement('div');
+  var $questionDiv3 = document.createElement('div');
+  var $questionDiv4 = document.createElement('div');
 
-    $questionDiv1.setAttribute('class', 'column-half');
-    $questionDiv2.setAttribute('class', 'column-half');
-    $questionDiv3.setAttribute('class', 'column-half');
-    $questionDiv4.setAttribute('class', 'column-half');
+  $questionDiv1.setAttribute('class', 'column-half');
+  $questionDiv2.setAttribute('class', 'column-half');
+  $questionDiv3.setAttribute('class', 'column-half');
+  $questionDiv4.setAttribute('class', 'column-half');
 
-    $choiceDiv.appendChild($questionDiv1);
-    $choiceDiv.appendChild($questionDiv2);
-    $choiceDiv.appendChild($questionDiv3);
-    $choiceDiv.appendChild($questionDiv4);
+  $choiceDiv.appendChild($questionDiv1);
+  $choiceDiv.appendChild($questionDiv2);
+  $choiceDiv.appendChild($questionDiv3);
+  $choiceDiv.appendChild($questionDiv4);
 
-    var $p1 = document.createElement('p');
-    var $p2 = document.createElement('p');
-    var $p3 = document.createElement('p');
-    var $p4 = document.createElement('p');
+  var $p1 = document.createElement('p');
+  var $p2 = document.createElement('p');
+  var $p3 = document.createElement('p');
+  var $p4 = document.createElement('p');
 
-    $p1.setAttribute('class', 'choice');
-    $p2.setAttribute('class', 'choice');
-    $p3.setAttribute('class', 'choice');
-    $p4.setAttribute('class', 'choice');
+  $p1.setAttribute('class', 'choice');
+  $p2.setAttribute('class', 'choice');
+  $p3.setAttribute('class', 'choice');
+  $p4.setAttribute('class', 'choice');
 
-    $questionDiv1.appendChild($p1);
-    $questionDiv2.appendChild($p2);
-    $questionDiv3.appendChild($p3);
-    $questionDiv4.appendChild($p4);
+  $p1.setAttribute('id', 'one');
+  $p2.setAttribute('id', 'two');
+  $p3.setAttribute('id', 'three');
+  $p4.setAttribute('id', 'four');
 
-    var $choice1 = document.createElement('span');
-    var $choice2 = document.createElement('span');
-    var $choice3 = document.createElement('span');
-    var $choice4 = document.createElement('span');
+  $questionDiv1.appendChild($p1);
+  $questionDiv2.appendChild($p2);
+  $questionDiv3.appendChild($p3);
+  $questionDiv4.appendChild($p4);
 
-    var randomInt = Math.floor(Math.random() * num);
-    $choice1.textContent = choicesArr[randomInt];
-    choicesArr.splice(randomInt, 1);
-    num--;
+  var $choice1 = document.createElement('span');
+  var $choice2 = document.createElement('span');
+  var $choice3 = document.createElement('span');
+  var $choice4 = document.createElement('span');
 
-    randomInt = Math.floor(Math.random() * num);
-    $choice2.textContent = choicesArr[randomInt];
-    choicesArr.splice(randomInt, 1);
-    num--;
+  var randomInt = Math.floor(Math.random() * num);
+  $choice1.textContent = choicesArr[randomInt];
+  choicesArr.splice(randomInt, 1);
+  num--;
 
-    randomInt = Math.floor(Math.random() * num);
-    $choice3.textContent = choicesArr[randomInt];
-    choicesArr.splice(randomInt, 1);
-    num--;
+  randomInt = Math.floor(Math.random() * num);
+  $choice2.textContent = choicesArr[randomInt];
+  choicesArr.splice(randomInt, 1);
+  num--;
 
-    $choice4.textContent = choicesArr[0];
+  randomInt = Math.floor(Math.random() * num);
+  $choice3.textContent = choicesArr[randomInt];
+  choicesArr.splice(randomInt, 1);
+  num--;
 
-    var $a = document.createElement('span');
-    var $b = document.createElement('span');
-    var $c = document.createElement('span');
-    var $d = document.createElement('span');
+  $choice4.textContent = choicesArr[0];
 
-    $a.textContent = 'A:';
-    $b.textContent = 'B:';
-    $c.textContent = 'C:';
-    $d.textContent = 'D:';
+  var $a = document.createElement('span');
+  var $b = document.createElement('span');
+  var $c = document.createElement('span');
+  var $d = document.createElement('span');
 
-    $a.setAttribute('class', 'float-left');
-    $b.setAttribute('class', 'float-left');
-    $c.setAttribute('class', 'float-left');
-    $d.setAttribute('class', 'float-left');
+  $a.textContent = 'A:';
+  $b.textContent = 'B:';
+  $c.textContent = 'C:';
+  $d.textContent = 'D:';
 
-    $p1.appendChild($choice1);
-    $p2.appendChild($choice2);
-    $p3.appendChild($choice3);
-    $p4.appendChild($choice4);
+  $a.setAttribute('class', 'float-left');
+  $b.setAttribute('class', 'float-left');
+  $c.setAttribute('class', 'float-left');
+  $d.setAttribute('class', 'float-left');
 
-    $p1.prepend($a);
-    $p2.prepend($b);
-    $p3.prepend($c);
-    $p4.prepend($d);
+  $p1.appendChild($choice1);
+  $p2.appendChild($choice2);
+  $p3.appendChild($choice3);
+  $p4.appendChild($choice4);
 
-    var $submitDiv = document.createElement('div');
-    $submitDiv.setAttribute('class', 'row center');
+  $p1.prepend($a);
+  $p2.prepend($b);
+  $p3.prepend($c);
+  $p4.prepend($d);
 
-    $questionContainer.appendChild($submitDiv);
+  var $submitDiv = document.createElement('div');
+  $submitDiv.setAttribute('class', 'row center');
 
-    var $submit = document.createElement('button');
+  $questionContainer.appendChild($submitDiv);
 
-    $submit.textContent = 'Submit';
+  var $submit = document.createElement('button');
 
-    $submit.setAttribute('class', 'submit');
+  $submit.textContent = 'Submit';
 
-    $submitDiv.appendChild($submit);
+  $submit.setAttribute('class', 'submit');
 
-    // console.log(correctAnswer);
+  $submitDiv.appendChild($submit);
 
-    $choiceDiv.addEventListener('click', clickAnswer);
-
-    // $submit.addEventListener('click', submitAnswer);
-
-    // function submitAnswer(event) {
-    //   console.log(event.target);
-    // }
-
-  }
+  $choiceDiv.addEventListener('click', clickAnswer);
 
   function clickAnswer(event) {
-    // var $paragraph = event.target.closest('p');
-    // var $spanNodes = $paragraph.childNodes;
 
-    // console.log($spanNodes[1].textContent);
+    var $paragraph = event.target.closest('p');
+    // var $spanNodes = $paragraph.childNodes;
+    // var clicked = $spanNodes[1].textContent;
+
+    // console.log('clicked', clicked);
+    // console.log('answer', correctAnswer);
+
+    for (var i = 0; i < $choiceDiv.childNodes.length; i++) {
+
+      $choiceDiv.childNodes[i].firstChild.setAttribute('class', 'choice');
+
+      if ($choiceDiv.childNodes[i].firstChild === $paragraph) {
+        $choiceDiv.childNodes[i].firstChild.setAttribute('class', 'choice border-highlight');
+
+      }
+
+    }
+
+    // $submitDiv.addEventListener('click', submitAnswer);
+
+    // function submitAnswer(event) {
+
+    //   if (clicked === correctAnswer) {
+    //     console.log('clicked correct answer');
+    //   } else {
+    //     console.log('WRONG');
+    //   }
+    // }
 
   }
 
