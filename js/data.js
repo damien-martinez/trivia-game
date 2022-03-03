@@ -1,1 +1,2 @@
-/* exported data */
+/* exported dataModel */
+var dataModel = {};

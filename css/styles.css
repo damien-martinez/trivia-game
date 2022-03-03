@@ -123,3 +123,11 @@ select {
 .border-highlight {
   border: solid 0.3rem #cbc0d3;
 }
+
+.green {
+  background-color: #95d5b2;
+}
+
+.red {
+  background-color: #f4acb7;
+}

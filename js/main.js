@@ -1,3 +1,5 @@
+/* global dataModel */
+
 var categoriesRequest = new XMLHttpRequest();
 var questionsRequest = new XMLHttpRequest();
 var $categorySelect = document.querySelector('#category-select');
@@ -37,7 +39,6 @@ function submitForm(event) {
   } else {
     apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions + '&category=' + pulledCategory + '&difficulty=' + difficulty + '&type=multiple';
   }
-
   questionsRequest.open('GET', apiUrl);
   questionsRequest.responseType = 'json';
 
@@ -60,9 +61,15 @@ $triviaForm.addEventListener('submit', submitForm);
 function seeQuestions(triviaObj) {
   $setUpContainer.setAttribute('class', 'hidden');
   $questionContainer.setAttribute('class', 'question-container');
-  var results = triviaObj.results;
+
+  dataModel.results = triviaObj.results;
+
+  var results = dataModel.results;
 
   var correctAnswer = results[0].correct_answer;
+
+  dataModel.correctAnswer = correctAnswer;
+
   var choicesArr = [correctAnswer, results[0].incorrect_answers[0], results[0].incorrect_answers[1], results[0].incorrect_answers[2]];
   var num = 3;
 
@@ -120,21 +127,57 @@ function seeQuestions(triviaObj) {
   var $choice4 = document.createElement('span');
 
   var randomInt = Math.floor(Math.random() * num);
-  $choice1.textContent = choicesArr[randomInt];
-  choicesArr.splice(randomInt, 1);
-  num--;
+  if (choicesArr[randomInt] === correctAnswer) {
+    $choice1.textContent = choicesArr[randomInt];
+    choicesArr.splice(randomInt, 1);
+    num--;
+
+    dataModel.correctChoiceDom = $p1;
+  } else {
+    $choice1.textContent = choicesArr[randomInt];
+    choicesArr.splice(randomInt, 1);
+    num--;
+
+  }
 
   randomInt = Math.floor(Math.random() * num);
-  $choice2.textContent = choicesArr[randomInt];
-  choicesArr.splice(randomInt, 1);
-  num--;
+
+  if (choicesArr[randomInt] === correctAnswer) {
+    $choice2.textContent = choicesArr[randomInt];
+    choicesArr.splice(randomInt, 1);
+    num--;
+
+    dataModel.correctChoiceDom = $p2;
+  } else {
+    $choice2.textContent = choicesArr[randomInt];
+    choicesArr.splice(randomInt, 1);
+    num--;
+
+  }
 
   randomInt = Math.floor(Math.random() * num);
-  $choice3.textContent = choicesArr[randomInt];
-  choicesArr.splice(randomInt, 1);
-  num--;
 
-  $choice4.textContent = choicesArr[0];
+  if (choicesArr[randomInt] === correctAnswer) {
+    $choice3.textContent = choicesArr[randomInt];
+    choicesArr.splice(randomInt, 1);
+    num--;
+
+    dataModel.correctChoiceDom = $p3;
+  } else {
+    $choice3.textContent = choicesArr[randomInt];
+    choicesArr.splice(randomInt, 1);
+    num--;
+
+  }
+
+  if (choicesArr[randomInt] === correctAnswer) {
+    $choice4.textContent = choicesArr[0];
+
+    dataModel.correctChoiceDom = $p4;
+  } else {
+    $choice4.textContent = choicesArr[0];
+
+  }
 
   var $a = document.createElement('span');
   var $b = document.createElement('span');
@@ -175,38 +218,38 @@ function seeQuestions(triviaObj) {
   $submitDiv.appendChild($submit);
 
   $choiceDiv.addEventListener('click', clickAnswer);
+  $submitDiv.addEventListener('click', submitAnswer);
 
-  function clickAnswer(event) {
+  dataModel.choiceDiv = $choiceDiv;
+  dataModel.submitDiv = $submitDiv;
 
-    var $paragraph = event.target.closest('p');
-    // var $spanNodes = $paragraph.childNodes;
-    // var clicked = $spanNodes[1].textContent;
+}
 
-    // console.log('clicked', clicked);
-    // console.log('answer', correctAnswer);
+function clickAnswer(event) {
 
-    for (var i = 0; i < $choiceDiv.childNodes.length; i++) {
+  var $paragraph = event.target.closest('p');
+  var $spanNodes = $paragraph.childNodes;
+  dataModel.clicked = $spanNodes[1].textContent;
+  dataModel.paragraph = $paragraph;
 
-      $choiceDiv.childNodes[i].firstChild.setAttribute('class', 'choice');
+  for (var i = 0; i < dataModel.choiceDiv.childNodes.length; i++) {
 
-      if ($choiceDiv.childNodes[i].firstChild === $paragraph) {
-        $choiceDiv.childNodes[i].firstChild.setAttribute('class', 'choice border-highlight');
+    dataModel.choiceDiv.childNodes[i].firstChild.setAttribute('class', 'choice');
 
-      }
+    if (dataModel.choiceDiv.childNodes[i].firstChild === $paragraph) {
+      dataModel.choiceDiv.childNodes[i].firstChild.setAttribute('class', 'choice border-highlight');
 
     }
 
-    // $submitDiv.addEventListener('click', submitAnswer);
-
-    // function submitAnswer(event) {
-
-    //   if (clicked === correctAnswer) {
-    //     console.log('clicked correct answer');
-    //   } else {
-    //     console.log('WRONG');
-    //   }
-    // }
-
   }
+}
 
+function submitAnswer(event) {
+
+  if (dataModel.clicked === dataModel.correctAnswer) {
+    dataModel.paragraph.setAttribute('class', 'choice green');
+  } else {
+    dataModel.paragraph.setAttribute('class', 'choice red');
+    dataModel.correctChoiceDom.setAttribute('class', 'choice green');
+  }
 }
