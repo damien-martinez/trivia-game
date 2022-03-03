@@ -1,2 +1,11 @@
 /* exported dataModel */
-var dataModel = {};
+var dataModel = {
+  choiceArr: [],
+  clicked: '',
+  correctAnswer: '',
+  correctChoiceDom: {},
+  paragraph: {},
+  results: [],
+  choiceDiv: {}
+
+};
