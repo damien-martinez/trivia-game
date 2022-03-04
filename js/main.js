@@ -92,7 +92,7 @@ function seeQuestions(results) {
 
   var $h1 = document.createElement('h1');
   $h1.setAttribute('class', 'question');
-  $h1.textContent = 'Question: ' + results[dataModel.count].question;
+  $h1.innerHTML = 'Question: ' + results[dataModel.count].question;
   $questionDiv.appendChild($h1);
 
   var $score = document.createElement('div');
@@ -203,12 +203,12 @@ function assignAnswer(choiceParam, paragraphParam) {
   var randomInt = Math.floor(Math.random() * dataModel.choicesArr.length);
 
   if (dataModel.choicesArr[randomInt] === dataModel.correctAnswer) {
-    choiceParam.textContent = dataModel.choicesArr[randomInt];
+    choiceParam.innerHTML = dataModel.choicesArr[randomInt];
     dataModel.choicesArr.splice(randomInt, 1);
 
     dataModel.correctChoiceDom = paragraphParam;
   } else {
-    choiceParam.textContent = dataModel.choicesArr[randomInt];
+    choiceParam.innerHTML = dataModel.choicesArr[randomInt];
     dataModel.choicesArr.splice(randomInt, 1);
   }
 }
