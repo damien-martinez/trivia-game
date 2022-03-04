@@ -189,7 +189,7 @@ function seeQuestions(results) {
   $submit.addEventListener('click', submitAnswer);
 
   var $totalScore = document.createElement('div');
-  $totalScore.textContent = String(dataModel.player) + ' has answered ' + String(dataModel.playerObj[String(dataModel.player)]) + ' questions correctly.';
+  $totalScore.textContent = dataModel.player + ' has answered ' + dataModel.playerObj[dataModel.player] + ' questions correctly.';
   $totalScore.setAttribute('class', 'total-score');
   $submitDiv.appendChild($totalScore);
 
@@ -238,7 +238,7 @@ function submitAnswer(event) {
     if (dataModel.clicked === dataModel.correctAnswer) {
       dataModel.paragraph.setAttribute('class', 'choice green');
       dataModel.correctCount++;
-      dataModel.playerObj[String(dataModel.player)] = dataModel.playerObj[String(dataModel.player)] + 1;
+      dataModel.playerObj[dataModel.player] = dataModel.playerObj[dataModel.player] + 1;
     } else {
       dataModel.paragraph.setAttribute('class', 'choice red');
       dataModel.correctChoiceDom.setAttribute('class', 'choice green');
