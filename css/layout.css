@@ -17,6 +17,11 @@
   margin: 0 auto;
 }
 
+.ending-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 .row {
   display: flex;
 }

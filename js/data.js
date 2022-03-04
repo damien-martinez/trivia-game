@@ -7,12 +7,13 @@ var dataModel = {
   paragraph: {},
   results: [],
   choiceDiv: {},
-  count: 0,
+  count: 8,
   questionDivDom: {},
   submitDivDom: {},
   correctCount: 0,
   playerObj: {},
-  player: ''
+  player: '',
+  questionsRequestData: {}
 
 };
 

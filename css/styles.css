@@ -80,10 +80,6 @@ select {
   margin-top: 2rem;
 }
 
-.margin-top-divs {
-  margin-top: 3rem;
-}
-
 .header-margin-left {
   margin-left: 1rem;
 }
@@ -147,4 +143,39 @@ select {
   margin-top: 2rem;
   color: white;
   font-size: 18px;
+}
+
+.trivia-complete-p {
+  color: white;
+  font-size: 38px;
+}
+
+.great-job-p {
+  color: white;
+  font-size: 36px;
+}
+
+/* .trophy-image{
+
+} */
+
+.p-div {
+  width: 100%;
+  text-align: center;
+}
+
+.player-score {
+  color: white;
+  font-size: 36px;
+}
+
+.setup-button {
+  background-color: #cbc0d3;
+  color: white;
+  border-radius: 0.6rem;
+  border: none;
+  padding: 0.5rem 4rem;
+  font-size: 32px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

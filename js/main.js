@@ -1,11 +1,13 @@
 /* global dataModel */
-
+var playTriviaClick = 0;
 var categoriesRequest = new XMLHttpRequest();
 var questionsRequest = new XMLHttpRequest();
 var $categorySelect = document.querySelector('#category-select');
 var $triviaForm = document.querySelector('#trivia-form');
 var $questionContainer = document.querySelector('.question-container');
 var $setUpContainer = document.querySelector('.container');
+var $endingContainer = document.querySelector('.ending-container');
+var $setUpButton = document.querySelector('.setup-button');
 
 window.addEventListener('load', function () {
 
@@ -30,46 +32,47 @@ window.addEventListener('load', function () {
 
 function submitForm(event) {
   event.preventDefault();
-  var playerUsedBool = false;
-  var player = $triviaForm.elements.name.value;
-  dataModel.player = player;
-  var difficulty = $triviaForm.elements.difficulty_select.value;
-  var numberOfQuestions = $triviaForm.elements.number_of_questions.value;
-  var pulledCategory = $triviaForm.elements.category_select.value;
 
-  for (var property in dataModel.playerObj) {
-    if (property === player) {
-      playerUsedBool = true;
-    }
-  }
+  playTriviaClick++;
 
-  if (playerUsedBool === false) {
-    dataModel.playerObj[String(player)] = 0;
-  }
+  if (playTriviaClick === 1) {
+    // console.log('submit form ran');
+    var playerUsedBool = false;
+    var player = $triviaForm.elements.name.value;
+    dataModel.player = player;
+    var difficulty = $triviaForm.elements.difficulty_select.value;
+    var numberOfQuestions = $triviaForm.elements.number_of_questions.value;
+    var pulledCategory = $triviaForm.elements.category_select.value;
 
-  if (difficulty === '') {
-    var apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions + '&category=' + pulledCategory + '&type=multiple';
-  } else {
-    apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions + '&category=' + pulledCategory + '&difficulty=' + difficulty + '&type=multiple';
-  }
-  questionsRequest.open('GET', apiUrl);
-  questionsRequest.responseType = 'json';
+    // console.log('values: ', difficulty, numberOfQuestions, pulledCategory);
 
-  function getTrivia() {
-    var results = questionsRequest.response.results;
-
-    dataModel.results = results;
-
-    if (questionsRequest.status === 200) {
-      seeQuestions(results);
+    for (var property in dataModel.playerObj) {
+      if (property === player) {
+        playerUsedBool = true;
+      }
     }
 
+    if (playerUsedBool === false) {
+      dataModel.playerObj[String(player)] = 0;
+    }
+
+    if (difficulty === '') {
+      var apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions + '&category=' + pulledCategory + '&type=multiple';
+    } else {
+      apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions + '&category=' + pulledCategory + '&difficulty=' + difficulty + '&type=multiple';
+    }
+    // console.log(apiUrl);
+
+    questionsRequest.open('GET', apiUrl);
+    questionsRequest.responseType = 'json';
+
+    dataModel.questionsRequestData = questionsRequest;
+
+    questionsRequest.addEventListener('load', getTrivia);
+
+    questionsRequest.send();
+
   }
-
-  questionsRequest.addEventListener('load', getTrivia);
-
-  questionsRequest.send();
-
 }
 
 $triviaForm.addEventListener('submit', submitForm);
@@ -257,6 +260,51 @@ function triggerSeeQuestions() {
   dataModel.questionDivDom.setAttribute('class', 'hidden');
   dataModel.submitDivDom.setAttribute('class', 'hidden');
   dataModel.scoreDom.setAttribute('class', 'hidden');
-  seeQuestions(dataModel.results);
 
+  if (dataModel.count < 10) {
+    seeQuestions(dataModel.results);
+  } else {
+    showTriviaCompete();
+  }
+
+}
+
+function showTriviaCompete() {
+  playTriviaClick = 0;
+
+  $endingContainer.setAttribute('class', 'ending-container');
+
+  var $playerScoreDiv = document.querySelector('.player-score-div');
+
+  var $playerScore = document.createElement('p');
+  $playerScore.setAttribute('class', 'player-score');
+  $playerScore.textContent = dataModel.player + ': ' + dataModel.correctCount + '/' + dataModel.results.length;
+
+  $playerScoreDiv.appendChild($playerScore);
+
+}
+
+function getTrivia() {
+
+  var results = dataModel.questionsRequestData.response.results;
+
+  dataModel.results = results;
+
+  if (dataModel.questionsRequestData.status === 200) {
+    seeQuestions(dataModel.results);
+  }
+
+}
+
+$setUpButton.addEventListener('click', goBackToSetup);
+
+function goBackToSetup(event) {
+  $endingContainer.setAttribute('class', 'ending-container hidden');
+  $setUpContainer.setAttribute('class', '.container');
+
+  $triviaForm.elements.name.value = '';
+
+  // var difficulty = $triviaForm.elements.difficulty_select.value;
+  // var numberOfQuestions = $triviaForm.elements.number_of_questions.value;
+  // var pulledCategory = $triviaForm.elements.category_select.value;
 }
