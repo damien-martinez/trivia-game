@@ -77,7 +77,7 @@ select {
 }
 
 .margin-top-submit {
-  margin: 2rem;
+  margin-top: 2rem;
 }
 
 .margin-top-divs {
@@ -139,5 +139,12 @@ select {
   width: 100%;
   margin-left: 1rem;
   color: white;
-  font-size: 24px;
+  font-size: 18px;
+}
+
+.total-score {
+  width: 100%;
+  margin-top: 2rem;
+  color: white;
+  font-size: 18px;
 }

@@ -32,11 +32,10 @@ function submitForm(event) {
   event.preventDefault();
   var playerUsedBool = false;
   var player = $triviaForm.elements.name.value;
+  dataModel.player = player;
   var difficulty = $triviaForm.elements.difficulty_select.value;
   var numberOfQuestions = $triviaForm.elements.number_of_questions.value;
   var pulledCategory = $triviaForm.elements.category_select.value;
-
-  dataModel.playerObj[String(player)] = 0;
 
   for (var property in dataModel.playerObj) {
     if (property === player) {
@@ -177,21 +176,22 @@ function seeQuestions(results) {
   $p4.prepend($d);
 
   var $submitDiv = document.createElement('div');
-  $submitDiv.setAttribute('class', 'row center margin-top-submit');
-
+  $submitDiv.setAttribute('class', 'row center margin-top-submit flex-wrap');
   $questionContainer.appendChild($submitDiv);
 
   var $submit = document.createElement('button');
-
   $submit.textContent = 'Submit';
-
   $submit.setAttribute('class', 'submit');
 
   $submitDiv.appendChild($submit);
 
   $choiceDiv.addEventListener('click', clickAnswer);
-
   $submit.addEventListener('click', submitAnswer);
+
+  var $totalScore = document.createElement('div');
+  $totalScore.textContent = String(dataModel.player) + ' has answered ' + String(dataModel.playerObj[String(dataModel.player)]) + ' questions correctly.';
+  $totalScore.setAttribute('class', 'total-score');
+  $submitDiv.appendChild($totalScore);
 
   dataModel.choiceDiv = $choiceDiv;
   dataModel.questionDivDom = $questionDiv;
@@ -238,6 +238,7 @@ function submitAnswer(event) {
     if (dataModel.clicked === dataModel.correctAnswer) {
       dataModel.paragraph.setAttribute('class', 'choice green');
       dataModel.correctCount++;
+      dataModel.playerObj[String(dataModel.player)] = dataModel.playerObj[String(dataModel.player)] + 1;
     } else {
       dataModel.paragraph.setAttribute('class', 'choice red');
       dataModel.correctChoiceDom.setAttribute('class', 'choice green');

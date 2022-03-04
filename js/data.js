@@ -11,7 +11,8 @@ var dataModel = {
   questionDivDom: {},
   submitDivDom: {},
   correctCount: 0,
-  playerObj: {}
+  playerObj: {},
+  player: ''
 
 };
 
