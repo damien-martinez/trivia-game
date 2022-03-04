@@ -30,9 +30,22 @@ window.addEventListener('load', function () {
 
 function submitForm(event) {
   event.preventDefault();
+  var playerUsedBool = false;
+  var player = $triviaForm.elements.name.value;
+  dataModel.player = player;
   var difficulty = $triviaForm.elements.difficulty_select.value;
   var numberOfQuestions = $triviaForm.elements.number_of_questions.value;
   var pulledCategory = $triviaForm.elements.category_select.value;
+
+  for (var property in dataModel.playerObj) {
+    if (property === player) {
+      playerUsedBool = true;
+    }
+  }
+
+  if (playerUsedBool === false) {
+    dataModel.playerObj[String(player)] = 0;
+  }
 
   if (difficulty === '') {
     var apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions + '&category=' + pulledCategory + '&type=multiple';
@@ -79,7 +92,7 @@ function seeQuestions(results) {
 
   var $h1 = document.createElement('h1');
   $h1.setAttribute('class', 'question');
-  $h1.textContent = 'Question: ' + results[dataModel.count].question;
+  $h1.innerHTML = 'Question: ' + results[dataModel.count].question;
   $questionDiv.appendChild($h1);
 
   var $score = document.createElement('div');
@@ -163,21 +176,22 @@ function seeQuestions(results) {
   $p4.prepend($d);
 
   var $submitDiv = document.createElement('div');
-  $submitDiv.setAttribute('class', 'row center margin-top-submit');
-
+  $submitDiv.setAttribute('class', 'row center margin-top-submit flex-wrap');
   $questionContainer.appendChild($submitDiv);
 
   var $submit = document.createElement('button');
-
   $submit.textContent = 'Submit';
-
   $submit.setAttribute('class', 'submit');
 
   $submitDiv.appendChild($submit);
 
   $choiceDiv.addEventListener('click', clickAnswer);
-
   $submit.addEventListener('click', submitAnswer);
+
+  var $totalScore = document.createElement('div');
+  $totalScore.textContent = dataModel.player + ' has answered ' + dataModel.playerObj[dataModel.player] + ' questions correctly.';
+  $totalScore.setAttribute('class', 'total-score');
+  $submitDiv.appendChild($totalScore);
 
   dataModel.choiceDiv = $choiceDiv;
   dataModel.questionDivDom = $questionDiv;
@@ -189,12 +203,12 @@ function assignAnswer(choiceParam, paragraphParam) {
   var randomInt = Math.floor(Math.random() * dataModel.choicesArr.length);
 
   if (dataModel.choicesArr[randomInt] === dataModel.correctAnswer) {
-    choiceParam.textContent = dataModel.choicesArr[randomInt];
+    choiceParam.innerHTML = dataModel.choicesArr[randomInt];
     dataModel.choicesArr.splice(randomInt, 1);
 
     dataModel.correctChoiceDom = paragraphParam;
   } else {
-    choiceParam.textContent = dataModel.choicesArr[randomInt];
+    choiceParam.innerHTML = dataModel.choicesArr[randomInt];
     dataModel.choicesArr.splice(randomInt, 1);
   }
 }
@@ -224,6 +238,7 @@ function submitAnswer(event) {
     if (dataModel.clicked === dataModel.correctAnswer) {
       dataModel.paragraph.setAttribute('class', 'choice green');
       dataModel.correctCount++;
+      dataModel.playerObj[dataModel.player] = dataModel.playerObj[dataModel.player] + 1;
     } else {
       dataModel.paragraph.setAttribute('class', 'choice red');
       dataModel.correctChoiceDom.setAttribute('class', 'choice green');
