@@ -30,9 +30,23 @@ window.addEventListener('load', function () {
 
 function submitForm(event) {
   event.preventDefault();
+  var playerUsedBool = false;
+  var player = $triviaForm.elements.name.value;
   var difficulty = $triviaForm.elements.difficulty_select.value;
   var numberOfQuestions = $triviaForm.elements.number_of_questions.value;
   var pulledCategory = $triviaForm.elements.category_select.value;
+
+  dataModel.playerObj[String(player)] = 0;
+
+  for (var property in dataModel.playerObj) {
+    if (property === player) {
+      playerUsedBool = true;
+    }
+  }
+
+  if (playerUsedBool === false) {
+    dataModel.playerObj[String(player)] = 0;
+  }
 
   if (difficulty === '') {
     var apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions + '&category=' + pulledCategory + '&type=multiple';

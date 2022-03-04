@@ -10,6 +10,24 @@ var dataModel = {
   count: 0,
   questionDivDom: {},
   submitDivDom: {},
-  correctCount: 0
+  correctCount: 0,
+  playerObj: {}
 
 };
+
+var previousData = localStorage.getItem('localPlayerData');
+
+if (previousData !== null) {
+  var parsedData = JSON.parse(previousData);
+
+  dataModel.playerObj = parsedData;
+}
+
+function stringifyData(event) {
+
+  var stringifyObj = JSON.stringify(dataModel.playerObj);
+  localStorage.setItem('localPlayerData', stringifyObj);
+  event.preventDefault();
+}
+
+window.addEventListener('beforeunload', stringifyData);
