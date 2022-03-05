@@ -12,7 +12,8 @@ var dataModel = {
   submitDivDom: {},
   correctCount: 0,
   playerObj: {},
-  player: ''
+  player: '',
+  questionsRequestData: {}
 
 };
 
