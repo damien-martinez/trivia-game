@@ -14,7 +14,6 @@ label,
 input,
 select,
 option {
-  display: block;
   font-family: Cabin, sans-serif;
   font-size: 16px;
 }
@@ -65,8 +64,7 @@ select {
   border: none;
   padding: 0.5rem 4rem;
   font-size: 32px;
-  margin-top: 6rem;
-  margin-bottom: 1rem;
+  margin-top: 5rem;
 }
 
 .submit {
@@ -78,12 +76,20 @@ select {
   font-size: 32px;
 }
 
+input,
+.submit,
+.play-trivia,
+.setup-button,
+select:hover {
+  cursor: pointer;
+}
+
 .margin-top-head {
   margin-top: 1rem;
 }
 
 .margin-top-submit {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .header-margin-left {
@@ -94,7 +100,7 @@ select {
   color: white;
   font-size: 34px;
   text-align: center;
-  margin-top: 4rem;
+  margin-top: 1rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -104,7 +110,7 @@ select {
   }
 
   .play-trivia {
-    margin-top: 9rem;
+    margin-top: 7rem;
   }
 
   .margin-top-divs {
@@ -114,10 +120,22 @@ select {
   .column-half {
     width: 50%;
   }
+
+  .question {
+    margin-top: 4rem;
+  }
+
+  .choice {
+    margin-top: 1rem;
+  }
+
+  .margin-top-submit {
+    margin-top: 1rem;
+  }
 }
 
 .choice {
-  margin: 1rem;
+  margin: 0.5rem;
   background-color: white;
   padding: 1rem;
   font-size: 24px;
@@ -141,7 +159,7 @@ select {
   width: 100%;
   margin-left: 1rem;
   color: white;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .total-score {
