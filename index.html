@@ -34,7 +34,7 @@
           <div class="difficulty-div column-half margin-divs">
             <label for="difficulty_select">Select Difficulty:</label>
             <select name="difficulty_select" id="difficulty-select">
-              <option value="" disabled selected>Any Difficulty</option>
+              <option value="" selected>Any Difficulty</option>
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
               <option value="hard">Hard</option>
@@ -43,7 +43,7 @@
           <div class="questions-div column-half margin-divs">
             <label for="number_of_questions">Number of Questions:</label>
             <select required name="number_of_questions" id="number-of-questions">
-              <option value="10" disabled selected>10</option>
+              <option value="10" selected>10</option>
               <option value="15">15</option>
               <option value="20">20</option>
               <option value="25">25</option>
@@ -52,7 +52,7 @@
           <div class="category-div column-half margin-divs">
             <label for="category_select">Category Select:</label>
             <select required name="category_select" id="category-select">
-              <option value="9" disabled selected>General Knowledge</option>
+              <option value="9" selected>General Knowledge</option>
             </select>
           </div>
         </div>
@@ -77,6 +77,7 @@
         </div>
       </div>
       <div class="row center player-score-div">
+        <p class="player-score"></p>
       </div>
       <div class="row center">
         <button class="setup-button" type="submit">Back to Game Set Up</button>

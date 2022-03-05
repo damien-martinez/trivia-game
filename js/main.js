@@ -8,6 +8,7 @@ var $questionContainer = document.querySelector('.question-container');
 var $setUpContainer = document.querySelector('.container');
 var $endingContainer = document.querySelector('.ending-container');
 var $setUpButton = document.querySelector('.setup-button');
+var $playerScore = document.querySelector('.player-score');
 
 window.addEventListener('load', function () {
 
@@ -36,15 +37,12 @@ function submitForm(event) {
   playTriviaClick++;
 
   if (playTriviaClick === 1) {
-    // console.log('submit form ran');
     var playerUsedBool = false;
     var player = $triviaForm.elements.name.value;
     dataModel.player = player;
     var difficulty = $triviaForm.elements.difficulty_select.value;
     var numberOfQuestions = $triviaForm.elements.number_of_questions.value;
     var pulledCategory = $triviaForm.elements.category_select.value;
-
-    // console.log('values: ', difficulty, numberOfQuestions, pulledCategory);
 
     for (var property in dataModel.playerObj) {
       if (property === player) {
@@ -61,7 +59,6 @@ function submitForm(event) {
     } else {
       apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + numberOfQuestions + '&category=' + pulledCategory + '&difficulty=' + difficulty + '&type=multiple';
     }
-    // console.log(apiUrl);
 
     questionsRequest.open('GET', apiUrl);
     questionsRequest.responseType = 'json';
@@ -81,125 +78,137 @@ function seeQuestions(results) {
   $setUpContainer.setAttribute('class', 'hidden');
   $questionContainer.setAttribute('class', 'question-container');
 
-  var correctAnswer = results[dataModel.count].correct_answer;
+  if (results[0] !== undefined) {
+    var correctAnswer = results[dataModel.count].correct_answer;
 
-  dataModel.correctAnswer = correctAnswer;
+    dataModel.correctAnswer = correctAnswer;
 
-  var choicesArr = [correctAnswer, results[dataModel.count].incorrect_answers[0], results[dataModel.count].incorrect_answers[1], results[dataModel.count].incorrect_answers[2]];
+    var choicesArr = [correctAnswer, results[dataModel.count].incorrect_answers[0], results[dataModel.count].incorrect_answers[1], results[dataModel.count].incorrect_answers[2]];
 
-  dataModel.choicesArr = choicesArr;
+    dataModel.choicesArr = choicesArr;
 
-  var $questionDiv = document.createElement('div');
-  $questionDiv.setAttribute('class', 'row');
-  $questionContainer.appendChild($questionDiv);
+    var $questionDiv = document.createElement('div');
+    $questionDiv.setAttribute('class', 'row');
+    $questionContainer.appendChild($questionDiv);
 
-  var $h1 = document.createElement('h1');
-  $h1.setAttribute('class', 'question');
-  $h1.innerHTML = 'Question: ' + results[dataModel.count].question;
-  $questionDiv.appendChild($h1);
+    var $h1 = document.createElement('h1');
+    $h1.setAttribute('class', 'question');
+    $h1.innerHTML = 'Question: ' + results[dataModel.count].question;
+    $questionDiv.appendChild($h1);
 
-  var $score = document.createElement('div');
-  $score.setAttribute('class', 'score');
-  $score.textContent = (dataModel.count + 1) + '/' + dataModel.results.length;
-  $questionContainer.appendChild($score);
-  dataModel.scoreDom = $score;
+    var $score = document.createElement('div');
+    $score.setAttribute('class', 'score');
+    $score.textContent = (dataModel.count + 1) + '/' + dataModel.results.length;
+    $questionContainer.appendChild($score);
+    dataModel.scoreDom = $score;
 
-  var $choiceDiv = document.createElement('div');
-  $choiceDiv.setAttribute('class', 'row flex-wrap margin-top-head');
-  $questionContainer.appendChild($choiceDiv);
+    var $choiceDiv = document.createElement('div');
+    $choiceDiv.setAttribute('class', 'row flex-wrap margin-top-head');
+    $questionContainer.appendChild($choiceDiv);
 
-  var $questionDiv1 = document.createElement('div');
-  var $questionDiv2 = document.createElement('div');
-  var $questionDiv3 = document.createElement('div');
-  var $questionDiv4 = document.createElement('div');
+    var $questionDiv1 = document.createElement('div');
+    var $questionDiv2 = document.createElement('div');
+    var $questionDiv3 = document.createElement('div');
+    var $questionDiv4 = document.createElement('div');
 
-  $questionDiv1.setAttribute('class', 'column-half');
-  $questionDiv2.setAttribute('class', 'column-half');
-  $questionDiv3.setAttribute('class', 'column-half');
-  $questionDiv4.setAttribute('class', 'column-half');
+    $questionDiv1.setAttribute('class', 'column-half');
+    $questionDiv2.setAttribute('class', 'column-half');
+    $questionDiv3.setAttribute('class', 'column-half');
+    $questionDiv4.setAttribute('class', 'column-half');
 
-  $choiceDiv.appendChild($questionDiv1);
-  $choiceDiv.appendChild($questionDiv2);
-  $choiceDiv.appendChild($questionDiv3);
-  $choiceDiv.appendChild($questionDiv4);
+    $choiceDiv.appendChild($questionDiv1);
+    $choiceDiv.appendChild($questionDiv2);
+    $choiceDiv.appendChild($questionDiv3);
+    $choiceDiv.appendChild($questionDiv4);
 
-  var $p1 = document.createElement('p');
-  var $p2 = document.createElement('p');
-  var $p3 = document.createElement('p');
-  var $p4 = document.createElement('p');
+    var $p1 = document.createElement('p');
+    var $p2 = document.createElement('p');
+    var $p3 = document.createElement('p');
+    var $p4 = document.createElement('p');
 
-  $p1.setAttribute('class', 'choice');
-  $p2.setAttribute('class', 'choice');
-  $p3.setAttribute('class', 'choice');
-  $p4.setAttribute('class', 'choice');
+    $p1.setAttribute('class', 'choice');
+    $p2.setAttribute('class', 'choice');
+    $p3.setAttribute('class', 'choice');
+    $p4.setAttribute('class', 'choice');
 
-  $p1.setAttribute('id', 'one');
-  $p2.setAttribute('id', 'two');
-  $p3.setAttribute('id', 'three');
-  $p4.setAttribute('id', 'four');
+    $p1.setAttribute('id', 'one');
+    $p2.setAttribute('id', 'two');
+    $p3.setAttribute('id', 'three');
+    $p4.setAttribute('id', 'four');
 
-  $questionDiv1.appendChild($p1);
-  $questionDiv2.appendChild($p2);
-  $questionDiv3.appendChild($p3);
-  $questionDiv4.appendChild($p4);
+    $questionDiv1.appendChild($p1);
+    $questionDiv2.appendChild($p2);
+    $questionDiv3.appendChild($p3);
+    $questionDiv4.appendChild($p4);
 
-  var $choice1 = document.createElement('span');
-  var $choice2 = document.createElement('span');
-  var $choice3 = document.createElement('span');
-  var $choice4 = document.createElement('span');
+    var $choice1 = document.createElement('span');
+    var $choice2 = document.createElement('span');
+    var $choice3 = document.createElement('span');
+    var $choice4 = document.createElement('span');
 
-  assignAnswer($choice1, $p1);
-  assignAnswer($choice2, $p2);
-  assignAnswer($choice3, $p3);
-  assignAnswer($choice4, $p4);
+    assignAnswer($choice1, $p1);
+    assignAnswer($choice2, $p2);
+    assignAnswer($choice3, $p3);
+    assignAnswer($choice4, $p4);
 
-  var $a = document.createElement('span');
-  var $b = document.createElement('span');
-  var $c = document.createElement('span');
-  var $d = document.createElement('span');
+    var $a = document.createElement('span');
+    var $b = document.createElement('span');
+    var $c = document.createElement('span');
+    var $d = document.createElement('span');
 
-  $a.textContent = 'A:';
-  $b.textContent = 'B:';
-  $c.textContent = 'C:';
-  $d.textContent = 'D:';
+    $a.textContent = 'A:';
+    $b.textContent = 'B:';
+    $c.textContent = 'C:';
+    $d.textContent = 'D:';
 
-  $a.setAttribute('class', 'float-left');
-  $b.setAttribute('class', 'float-left');
-  $c.setAttribute('class', 'float-left');
-  $d.setAttribute('class', 'float-left');
+    $a.setAttribute('class', 'float-left');
+    $b.setAttribute('class', 'float-left');
+    $c.setAttribute('class', 'float-left');
+    $d.setAttribute('class', 'float-left');
 
-  $p1.appendChild($choice1);
-  $p2.appendChild($choice2);
-  $p3.appendChild($choice3);
-  $p4.appendChild($choice4);
+    $p1.appendChild($choice1);
+    $p2.appendChild($choice2);
+    $p3.appendChild($choice3);
+    $p4.appendChild($choice4);
 
-  $p1.prepend($a);
-  $p2.prepend($b);
-  $p3.prepend($c);
-  $p4.prepend($d);
+    $p1.prepend($a);
+    $p2.prepend($b);
+    $p3.prepend($c);
+    $p4.prepend($d);
 
-  var $submitDiv = document.createElement('div');
-  $submitDiv.setAttribute('class', 'row center margin-top-submit flex-wrap');
-  $questionContainer.appendChild($submitDiv);
+    var $submitDiv = document.createElement('div');
+    $submitDiv.setAttribute('class', 'row center margin-top-submit flex-wrap');
+    $questionContainer.appendChild($submitDiv);
 
-  var $submit = document.createElement('button');
-  $submit.textContent = 'Submit';
-  $submit.setAttribute('class', 'submit');
+    var $submit = document.createElement('button');
+    $submit.textContent = 'Submit';
+    $submit.setAttribute('class', 'submit');
 
-  $submitDiv.appendChild($submit);
+    $submitDiv.appendChild($submit);
 
-  $choiceDiv.addEventListener('click', clickAnswer);
-  $submit.addEventListener('click', submitAnswer);
+    $choiceDiv.addEventListener('click', clickAnswer);
+    $submit.addEventListener('click', submitAnswer);
 
-  var $totalScore = document.createElement('div');
-  $totalScore.textContent = dataModel.player + ' has answered ' + dataModel.playerObj[dataModel.player] + ' questions correctly.';
-  $totalScore.setAttribute('class', 'total-score');
-  $submitDiv.appendChild($totalScore);
+    var $totalScore = document.createElement('div');
+    $totalScore.textContent = dataModel.player + ' has answered ' + dataModel.playerObj[dataModel.player] + ' questions correctly.';
+    $totalScore.setAttribute('class', 'total-score');
+    $submitDiv.appendChild($totalScore);
 
-  dataModel.choiceDiv = $choiceDiv;
-  dataModel.questionDivDom = $questionDiv;
-  dataModel.submitDivDom = $submitDiv;
+    dataModel.choiceDiv = $choiceDiv;
+    dataModel.questionDivDom = $questionDiv;
+    dataModel.submitDivDom = $submitDiv;
+  } else {
+    var apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + $triviaForm.elements.number_of_questions.value + '&category=9' + '&difficulty=' + $triviaForm.elements.difficulty_select.value + '&type=multiple';
+    questionsRequest.open('GET', apiUrl);
+    questionsRequest.responseType = 'json';
 
+    dataModel.questionsRequestData = questionsRequest;
+
+    questionsRequest.addEventListener('load', getTrivia);
+
+    questionsRequest.send();
+
+  }
 }
 
 function assignAnswer(choiceParam, paragraphParam) {
@@ -261,26 +270,20 @@ function triggerSeeQuestions() {
   dataModel.submitDivDom.setAttribute('class', 'hidden');
   dataModel.scoreDom.setAttribute('class', 'hidden');
 
-  if (dataModel.count < 10) {
+  if (dataModel.count < dataModel.results.length) {
     seeQuestions(dataModel.results);
   } else {
-    showTriviaCompete();
+    showTriviaComplete();
   }
 
 }
 
-function showTriviaCompete() {
+function showTriviaComplete() {
   playTriviaClick = 0;
 
   $endingContainer.setAttribute('class', 'ending-container');
 
-  var $playerScoreDiv = document.querySelector('.player-score-div');
-
-  var $playerScore = document.createElement('p');
-  $playerScore.setAttribute('class', 'player-score');
   $playerScore.textContent = dataModel.player + ': ' + dataModel.correctCount + '/' + dataModel.results.length;
-
-  $playerScoreDiv.appendChild($playerScore);
 
 }
 
@@ -303,8 +306,10 @@ function goBackToSetup(event) {
   $setUpContainer.setAttribute('class', '.container');
 
   $triviaForm.elements.name.value = '';
+  dataModel.count = 0;
+  dataModel.correctAnswer = 0;
 
-  // var difficulty = $triviaForm.elements.difficulty_select.value;
-  // var numberOfQuestions = $triviaForm.elements.number_of_questions.value;
-  // var pulledCategory = $triviaForm.elements.category_select.value;
+  $triviaForm.elements.difficulty_select.value = '';
+  $triviaForm.elements.number_of_questions.value = 10;
+  $triviaForm.elements.category_select.value = 9;
 }

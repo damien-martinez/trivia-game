@@ -7,7 +7,7 @@ var dataModel = {
   paragraph: {},
   results: [],
   choiceDiv: {},
-  count: 8,
+  count: 0,
   questionDivDom: {},
   submitDivDom: {},
   correctCount: 0,
