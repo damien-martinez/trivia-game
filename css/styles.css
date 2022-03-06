@@ -35,8 +35,7 @@ select {
 }
 
 .abacus {
-  height: 50%;
-  width: 10%;
+  width: 1.8rem;
 }
 
 .abacus-div {
@@ -201,4 +200,41 @@ select:hover {
   font-size: 32px;
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-dual-ring::after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.ring {
+  height: 80vh;
+  align-items: center;
+}
+
+.error-message {
+  color: white;
 }
