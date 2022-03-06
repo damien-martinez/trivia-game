@@ -87,12 +87,9 @@ function seeQuestions(results) {
 
     dataModel.choicesArr = choicesArr;
 
-    var $formForSubmit = document.createElement('form');
-    $questionContainer.appendChild($formForSubmit);
-
     var $questionDiv = document.createElement('div');
     $questionDiv.setAttribute('class', 'row');
-    $formForSubmit.appendChild($questionDiv);
+    $questionContainer.appendChild($questionDiv);
 
     var $h1 = document.createElement('h1');
     $h1.setAttribute('class', 'question');
@@ -102,12 +99,12 @@ function seeQuestions(results) {
     var $score = document.createElement('div');
     $score.setAttribute('class', 'score');
     $score.textContent = (dataModel.count + 1) + '/' + dataModel.results.length;
-    $formForSubmit.appendChild($score);
+    $questionContainer.appendChild($score);
     dataModel.scoreDom = $score;
 
     var $choiceDiv = document.createElement('div');
     $choiceDiv.setAttribute('class', 'row flex-wrap margin-top-head');
-    $formForSubmit.appendChild($choiceDiv);
+    $questionContainer.appendChild($choiceDiv);
 
     var $questionDiv1 = document.createElement('div');
     var $questionDiv2 = document.createElement('div');
@@ -181,7 +178,7 @@ function seeQuestions(results) {
 
     var $submitDiv = document.createElement('div');
     $submitDiv.setAttribute('class', 'row center margin-top-submit flex-wrap');
-    $formForSubmit.appendChild($submitDiv);
+    $questionContainer.appendChild($submitDiv);
 
     var $submit = document.createElement('button');
     $submit.textContent = 'Submit';
@@ -189,7 +186,7 @@ function seeQuestions(results) {
     $submitDiv.appendChild($submit);
 
     $choiceDiv.addEventListener('click', clickAnswer);
-    $submit.addEventListener('submit', submitAnswer);
+    $submit.addEventListener('click', submitAnswer);
 
     var $totalScore = document.createElement('div');
     $totalScore.textContent = dataModel.player + ' has answered ' + dataModel.playerObj[dataModel.player] + ' questions correctly.';
@@ -247,7 +244,6 @@ function clickAnswer(event) {
 }
 
 function submitAnswer(event) {
-  event.preventDefault();
   if (dataModel.clicked !== '') {
 
     if (dataModel.clicked === dataModel.correctAnswer) {
@@ -302,10 +298,9 @@ function getTrivia() {
 
 }
 
-$setUpButton.addEventListener('submit', goBackToSetup);
+$setUpButton.addEventListener('click', goBackToSetup);
 
 function goBackToSetup(event) {
-  event.preventDefault();
   $endingContainer.setAttribute('class', 'ending-container hidden');
   $setUpContainer.setAttribute('class', '.container');
 
