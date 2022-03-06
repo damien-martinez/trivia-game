@@ -1,3 +1,3 @@
-# ajax-project
+# trivia-game
 
-A dynamic HTML, CSS, and JavaScript solo project.
+A web application for trivia lovers who want to answer trivia questions.
