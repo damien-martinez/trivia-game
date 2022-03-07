@@ -9,6 +9,7 @@ var $setUpContainer = document.querySelector('.container');
 var $endingContainer = document.querySelector('.ending-container');
 var $setUpButton = document.querySelector('.setup-button');
 var $playerScore = document.querySelector('.player-score');
+var $loadRing = document.querySelector('.ring');
 
 window.addEventListener('load', function () {
 
@@ -65,6 +66,9 @@ function submitForm(event) {
 
     dataModel.questionsRequestData = questionsRequest;
 
+    $setUpContainer.setAttribute('class', 'hidden');
+    $questionContainer.setAttribute('class', 'question-container');
+
     questionsRequest.addEventListener('load', getTrivia);
 
     questionsRequest.send();
@@ -75,8 +79,10 @@ function submitForm(event) {
 $triviaForm.addEventListener('submit', submitForm);
 
 function seeQuestions(results) {
-  $setUpContainer.setAttribute('class', 'hidden');
-  $questionContainer.setAttribute('class', 'question-container');
+  // $setUpContainer.setAttribute('class', 'hidden');
+  // $questionContainer.setAttribute('class', 'question-container');
+
+  $loadRing.setAttribute('class', 'hidden');
 
   if (results[0] !== undefined) {
     var correctAnswer = results[dataModel.count].correct_answer;
@@ -183,7 +189,6 @@ function seeQuestions(results) {
     var $submit = document.createElement('button');
     $submit.textContent = 'Submit';
     $submit.setAttribute('class', 'submit');
-
     $submitDiv.appendChild($submit);
 
     $choiceDiv.addEventListener('click', clickAnswer);
@@ -203,6 +208,8 @@ function seeQuestions(results) {
     questionsRequest.responseType = 'json';
 
     dataModel.questionsRequestData = questionsRequest;
+
+    $questionContainer.setAttribute('class', 'question-container');
 
     questionsRequest.addEventListener('load', getTrivia);
 
@@ -294,7 +301,21 @@ function getTrivia() {
   dataModel.results = results;
 
   if (dataModel.questionsRequestData.status === 200) {
+
     seeQuestions(dataModel.results);
+
+  } else {
+    $loadRing.setAttribute('class', 'hidden');
+
+    var $errorDiv = document.createElement('div');
+    $errorDiv.setAttribute('class', 'row center error-div');
+    $questionContainer.appendChild($errorDiv);
+
+    var $errorP = document.createElement('p');
+    $errorP.setAttribute('class', 'error-message');
+    $errorP.textContent = 'Something went wrong with the request. Please refresh the page and try again later.';
+    $errorDiv.appendChild($errorP);
+
   }
 
 }

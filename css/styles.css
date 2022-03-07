@@ -14,7 +14,6 @@ label,
 input,
 select,
 option {
-  display: block;
   font-family: Cabin, sans-serif;
   font-size: 16px;
 }
@@ -36,8 +35,7 @@ select {
 }
 
 .abacus {
-  height: 50%;
-  width: 10%;
+  width: 1.8rem;
 }
 
 .abacus-div {
@@ -65,8 +63,7 @@ select {
   border: none;
   padding: 0.5rem 4rem;
   font-size: 32px;
-  margin-top: 6rem;
-  margin-bottom: 1rem;
+  margin-top: 5rem;
 }
 
 .submit {
@@ -78,12 +75,20 @@ select {
   font-size: 32px;
 }
 
+input,
+.submit,
+.play-trivia,
+.setup-button,
+select:hover {
+  cursor: pointer;
+}
+
 .margin-top-head {
   margin-top: 1rem;
 }
 
 .margin-top-submit {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .header-margin-left {
@@ -94,7 +99,7 @@ select {
   color: white;
   font-size: 34px;
   text-align: center;
-  margin-top: 4rem;
+  margin-top: 1rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -104,7 +109,7 @@ select {
   }
 
   .play-trivia {
-    margin-top: 9rem;
+    margin-top: 7rem;
   }
 
   .margin-top-divs {
@@ -114,15 +119,28 @@ select {
   .column-half {
     width: 50%;
   }
+
+  .question {
+    margin-top: 4rem;
+  }
+
+  .choice {
+    margin-top: 1rem;
+  }
+
+  .margin-top-submit {
+    margin-top: 1rem;
+  }
 }
 
 .choice {
-  margin: 1rem;
+  margin: 0.5rem;
   background-color: white;
-  padding: 1rem;
+  padding: 0.8rem;
   font-size: 24px;
   text-align: center;
   border-radius: 0.3rem;
+  border: solid 0.3rem white;
 }
 
 .border-highlight {
@@ -131,17 +149,19 @@ select {
 
 .green {
   background-color: #95d5b2;
+  border: solid 0.3rem #95d5b2;
 }
 
 .red {
   background-color: #f4acb7;
+  border: solid 0.3rem #f4acb7;
 }
 
 .score {
   width: 100%;
   margin-left: 1rem;
   color: white;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .total-score {
@@ -180,4 +200,41 @@ select {
   font-size: 32px;
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-dual-ring::after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.ring {
+  height: 80vh;
+  align-items: center;
+}
+
+.error-message {
+  color: white;
 }
