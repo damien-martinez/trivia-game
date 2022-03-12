@@ -13,7 +13,8 @@ var dataModel = {
   correctCount: 0,
   playerObj: {},
   player: '',
-  questionsRequestData: {}
+  questionsRequestData: {},
+  clickedCounter: 0
 
 };
 

@@ -79,8 +79,6 @@ function submitForm(event) {
 $triviaForm.addEventListener('submit', submitForm);
 
 function seeQuestions(results) {
-  // $setUpContainer.setAttribute('class', 'hidden');
-  // $questionContainer.setAttribute('class', 'question-container');
 
   $loadRing.setAttribute('class', 'hidden');
 
@@ -252,7 +250,10 @@ function clickAnswer(event) {
 }
 
 function submitAnswer(event) {
-  if (dataModel.clicked !== '') {
+
+  dataModel.clickedCounter++;
+
+  if (dataModel.clicked !== '' & dataModel.clickedCounter === 1) {
 
     if (dataModel.clicked === dataModel.correctAnswer) {
       dataModel.paragraph.setAttribute('class', 'choice green');
@@ -270,6 +271,7 @@ function submitAnswer(event) {
 }
 
 function triggerSeeQuestions() {
+  dataModel.clickedCounter = 0;
   dataModel.clicked = '';
   dataModel.count++;
   dataModel.choiceDiv.setAttribute('class', 'hidden');
