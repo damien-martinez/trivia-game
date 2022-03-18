@@ -66,7 +66,7 @@ function submitForm(event) {
 
     dataModel.questionsRequestData = questionsRequest;
 
-    $setUpContainer.setAttribute('class', 'hidden');
+    $setUpContainer.setAttribute('class', 'container hidden');
     $questionContainer.setAttribute('class', 'question-container');
 
     questionsRequest.addEventListener('load', getTrivia);
@@ -101,8 +101,17 @@ function seeQuestions(results) {
     $questionDiv.appendChild($h1);
 
     var $score = document.createElement('div');
-    $score.setAttribute('class', 'score');
-    $score.textContent = (dataModel.count + 1) + '/' + dataModel.results.length;
+    $score.setAttribute('class', 'row score');
+
+    var $scoreP = document.createElement('p');
+    $scoreP.textContent = (dataModel.count + 1) + '/' + dataModel.results.length;
+    $score.appendChild($scoreP);
+
+    var $timer = document.createElement('p');
+    $timer.textContent = `00:${dataModel.seconds}`;
+    dataModel.timerDom = $timer;
+    $score.appendChild($timer);
+
     $questionContainer.appendChild($score);
     dataModel.scoreDom = $score;
 
@@ -200,6 +209,14 @@ function seeQuestions(results) {
     dataModel.choiceDiv = $choiceDiv;
     dataModel.questionDivDom = $questionDiv;
     dataModel.submitDivDom = $submitDiv;
+
+    // var theInterval = setInterval(() => {
+    //   if (dataModel.seconds !== 0) {
+    //     dataModel.seconds--;
+    //     $timer.textContent = `00:${dataModel.seconds}`;
+    //   }
+
+    // }, 1000);
   } else {
     var apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + $triviaForm.elements.number_of_questions.value + '&category=9' + '&difficulty=' + $triviaForm.elements.difficulty_select.value + '&type=multiple';
     questionsRequest.open('GET', apiUrl);

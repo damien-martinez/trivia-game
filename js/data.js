@@ -14,7 +14,10 @@ var dataModel = {
   playerObj: {},
   player: '',
   questionsRequestData: {},
-  clickedCounter: 0
+  clickedCounter: 0,
+  seconds: 30,
+  scoreDom: {},
+  timerDom: {}
 
 };
 
