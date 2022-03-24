@@ -210,13 +210,17 @@ function seeQuestions(results) {
     dataModel.questionDivDom = $questionDiv;
     dataModel.submitDivDom = $submitDiv;
 
-    // var theInterval = setInterval(() => {
-    //   if (dataModel.seconds !== 0) {
-    //     dataModel.seconds--;
-    //     $timer.textContent = `00:${dataModel.seconds}`;
-    //   }
+    var intervalId = setInterval(() => {
 
-    // }, 1000);
+      dataModel.intervalId = intervalId;
+      if (dataModel.seconds !== 0) {
+        dataModel.seconds--;
+        $timer.textContent = `00:${dataModel.seconds}`;
+      } else if (dataModel.seconds === 0) {
+        submitAnswer();
+      }
+
+    }, 1000);
   } else {
     var apiUrl = 'https://opentdb.com/api.php?' + 'amount=' + $triviaForm.elements.number_of_questions.value + '&category=9' + '&difficulty=' + $triviaForm.elements.difficulty_select.value + '&type=multiple';
     questionsRequest.open('GET', apiUrl);
@@ -268,9 +272,12 @@ function clickAnswer(event) {
 
 function submitAnswer(event) {
 
-  dataModel.clickedCounter++;
+  // dataModel.clickedCounter++;
+  // console.log(dataModel.clickedCounter);
+  // working on clearing counter
 
   if (dataModel.clicked !== '' & dataModel.clickedCounter === 1) {
+    clearInterval(dataModel.intervalId);
 
     if (dataModel.clicked === dataModel.correctAnswer) {
       dataModel.paragraph.setAttribute('class', 'choice green');
@@ -284,6 +291,13 @@ function submitAnswer(event) {
     setTimeout(triggerSeeQuestions, 500);
 
   }
+  if (dataModel.seconds === 0) {
+    clearInterval(dataModel.intervalId);
+
+    dataModel.correctChoiceDom.setAttribute('class', 'choice green');
+    setTimeout(triggerSeeQuestions, 500);
+
+  }
 
 }
 
@@ -291,6 +305,7 @@ function triggerSeeQuestions() {
   dataModel.clickedCounter = 0;
   dataModel.clicked = '';
   dataModel.count++;
+  dataModel.seconds = 30;
   dataModel.choiceDiv.setAttribute('class', 'hidden');
   dataModel.questionDivDom.setAttribute('class', 'hidden');
   dataModel.submitDivDom.setAttribute('class', 'hidden');

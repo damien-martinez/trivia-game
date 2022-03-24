@@ -17,7 +17,8 @@ var dataModel = {
   clickedCounter: 0,
   seconds: 30,
   scoreDom: {},
-  timerDom: {}
+  timerDom: {},
+  intervalId: 0
 
 };
 

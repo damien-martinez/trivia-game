@@ -147,14 +147,14 @@ select:hover {
   border: solid 0.3rem #cbc0d3;
 }
 
-.green {
-  background-color: #95d5b2;
-  border: solid 0.3rem #95d5b2;
-}
-
 .red {
   background-color: #f4acb7;
   border: solid 0.3rem #f4acb7;
+}
+
+.green {
+  background-color: #95d5b2;
+  border: solid 0.3rem #95d5b2;
 }
 
 .score {
