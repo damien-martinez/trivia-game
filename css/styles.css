@@ -136,30 +136,6 @@ select:hover {
   }
 }
 
-.choice {
-  margin: 0.5rem;
-  background-color: white;
-  padding: 0.8rem;
-  font-size: 24px;
-  text-align: center;
-  border-radius: 0.3rem;
-  border: solid 0.3rem white;
-}
-
-.border-highlight {
-  border: solid 0.3rem #cbc0d3;
-}
-
-.green {
-  background-color: #95d5b2;
-  border: solid 0.3rem #95d5b2;
-}
-
-.red {
-  background-color: #f4acb7;
-  border: solid 0.3rem #f4acb7;
-}
-
 .score {
   margin-left: 1rem;
   color: white;
@@ -243,4 +219,36 @@ select:hover {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.button-choice {
+  background-color: white;
+  border-radius: 0.3rem;
+  border: solid 0.3rem white;
+  margin: 0.5rem;
+}
+
+.choice {
+  margin: 1rem;
+  background-color: white;
+  padding: 0.8rem;
+  font-size: 24px;
+  text-align: center;
+  border-radius: 0.3rem;
+  border: solid 0.3rem white;
+  width: 100%;
+}
+
+.border-highlight {
+  border: solid 0.3rem #cbc0d3;
+}
+
+.green {
+  background-color: #95d5b2;
+  border: solid 0.3rem #95d5b2;
+}
+
+.red {
+  background-color: #f4acb7;
+  border: solid 0.3rem #f4acb7;
 }

@@ -79,8 +79,6 @@ function submitForm(event) {
 $triviaForm.addEventListener('submit', submitForm);
 
 function seeQuestions(results) {
-  // $setUpContainer.setAttribute('class', 'hidden');
-  // $questionContainer.setAttribute('class', 'question-container');
 
   $loadRing.setAttribute('class', 'hidden');
 
@@ -117,25 +115,25 @@ function seeQuestions(results) {
     var $questionDiv3 = document.createElement('div');
     var $questionDiv4 = document.createElement('div');
 
-    $questionDiv1.setAttribute('class', 'column-half cursor-pointer');
-    $questionDiv2.setAttribute('class', 'column-half cursor-pointer');
-    $questionDiv3.setAttribute('class', 'column-half cursor-pointer');
-    $questionDiv4.setAttribute('class', 'column-half cursor-pointer');
+    $questionDiv1.setAttribute('class', 'row column-half');
+    $questionDiv2.setAttribute('class', 'row column-half');
+    $questionDiv3.setAttribute('class', 'row column-half');
+    $questionDiv4.setAttribute('class', 'row column-half');
 
     $choiceDiv.appendChild($questionDiv1);
     $choiceDiv.appendChild($questionDiv2);
     $choiceDiv.appendChild($questionDiv3);
     $choiceDiv.appendChild($questionDiv4);
 
-    var $p1 = document.createElement('p');
-    var $p2 = document.createElement('p');
-    var $p3 = document.createElement('p');
-    var $p4 = document.createElement('p');
+    var $p1 = document.createElement('button');
+    var $p2 = document.createElement('button');
+    var $p3 = document.createElement('button');
+    var $p4 = document.createElement('button');
 
-    $p1.setAttribute('class', 'choice');
-    $p2.setAttribute('class', 'choice');
-    $p3.setAttribute('class', 'choice');
-    $p4.setAttribute('class', 'choice');
+    $p1.setAttribute('class', 'choice cursor-pointer');
+    $p2.setAttribute('class', 'choice cursor-pointer');
+    $p3.setAttribute('class', 'choice cursor-pointer');
+    $p4.setAttribute('class', 'choice cursor-pointer');
 
     $p1.setAttribute('id', 'one');
     $p2.setAttribute('id', 'two');
@@ -234,7 +232,7 @@ function assignAnswer(choiceParam, paragraphParam) {
 
 function clickAnswer(event) {
 
-  var $paragraph = event.target.closest('p');
+  var $paragraph = event.target.closest('button');
   var $spanNodes = $paragraph.childNodes;
   dataModel.clicked = $spanNodes[1].textContent;
   dataModel.paragraph = $paragraph;
