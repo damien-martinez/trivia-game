@@ -117,10 +117,10 @@ function seeQuestions(results) {
     var $questionDiv3 = document.createElement('div');
     var $questionDiv4 = document.createElement('div');
 
-    $questionDiv1.setAttribute('class', 'column-half');
-    $questionDiv2.setAttribute('class', 'column-half');
-    $questionDiv3.setAttribute('class', 'column-half');
-    $questionDiv4.setAttribute('class', 'column-half');
+    $questionDiv1.setAttribute('class', 'column-half cursor-pointer');
+    $questionDiv2.setAttribute('class', 'column-half cursor-pointer');
+    $questionDiv3.setAttribute('class', 'column-half cursor-pointer');
+    $questionDiv4.setAttribute('class', 'column-half cursor-pointer');
 
     $choiceDiv.appendChild($questionDiv1);
     $choiceDiv.appendChild($questionDiv2);
@@ -188,7 +188,7 @@ function seeQuestions(results) {
 
     var $submit = document.createElement('button');
     $submit.textContent = 'Submit';
-    $submit.setAttribute('class', 'submit');
+    $submit.setAttribute('class', 'submit column-half');
     $submitDiv.appendChild($submit);
 
     $choiceDiv.addEventListener('click', clickAnswer);
