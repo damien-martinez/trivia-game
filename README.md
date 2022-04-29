@@ -34,6 +34,6 @@ This project was built with the intention of practicing freshly learned concepts
 ## System Requirements
 - Any modern browser! 
 
-## Instructions on how to use app
+## Getting Started
 - Simply open this link on a browser
 - [Link to live deployment of app.](damien-martinez.github.io/trivia-game/)
