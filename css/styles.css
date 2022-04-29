@@ -238,3 +238,21 @@ select:hover {
 .error-message {
   color: white;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1280px) {
+  .tablet-margin {
+    margin-top: 7rem;
+  }
+
+  .total-score {
+    margin-top: 6rem;
+  }
+
+  .question-container {
+    max-width: 1000px;
+  }
+}

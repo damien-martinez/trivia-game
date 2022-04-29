@@ -94,7 +94,7 @@ function seeQuestions(results) {
     dataModel.choicesArr = choicesArr;
 
     var $questionDiv = document.createElement('div');
-    $questionDiv.setAttribute('class', 'row');
+    $questionDiv.setAttribute('class', 'row tablet-margin');
     $questionContainer.appendChild($questionDiv);
 
     var $h1 = document.createElement('h1');
@@ -117,10 +117,10 @@ function seeQuestions(results) {
     var $questionDiv3 = document.createElement('div');
     var $questionDiv4 = document.createElement('div');
 
-    $questionDiv1.setAttribute('class', 'column-half');
-    $questionDiv2.setAttribute('class', 'column-half');
-    $questionDiv3.setAttribute('class', 'column-half');
-    $questionDiv4.setAttribute('class', 'column-half');
+    $questionDiv1.setAttribute('class', 'column-half cursor-pointer');
+    $questionDiv2.setAttribute('class', 'column-half cursor-pointer');
+    $questionDiv3.setAttribute('class', 'column-half cursor-pointer');
+    $questionDiv4.setAttribute('class', 'column-half cursor-pointer');
 
     $choiceDiv.appendChild($questionDiv1);
     $choiceDiv.appendChild($questionDiv2);
