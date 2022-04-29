@@ -104,6 +104,7 @@ select:hover {
 
 @media screen and (min-width: 768px) {
   .container,
+  .question-container,
   .header-container {
     max-width: 900px;
   }
@@ -237,4 +238,8 @@ select:hover {
 
 .error-message {
   color: white;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
