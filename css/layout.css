@@ -27,7 +27,6 @@
 }
 
 .no-wrap-center {
-  flex-wrap: nowrap;
   align-items: center;
 }
 
