@@ -188,7 +188,7 @@ function seeQuestions(results) {
 
     var $submit = document.createElement('button');
     $submit.textContent = 'Submit';
-    $submit.setAttribute('class', 'submit');
+    $submit.setAttribute('class', 'submit column-half');
     $submitDiv.appendChild($submit);
 
     $choiceDiv.addEventListener('click', clickAnswer);
